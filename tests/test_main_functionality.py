@@ -3,7 +3,6 @@ import allure
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
 from pages.orders_page import OrdersPage
-from locators import MainPageLocators
 from constants import Urls
 
 
@@ -13,7 +12,7 @@ class TestMainFunctionality:
     @allure.description('Переход к конструктору при нажатии на кнопку «Конструктор» в хедере')
     def test_redirect_to_constructor(self, driver):
         login_page = LoginPage(driver)
-        login_page.open_page(Urls.LOGIN_URL)
+        login_page.open_page(Urls.BASE_URL + Urls.LOGIN_URL)
         login_page.loading_login_page()
         page = MainPage(driver)
         page.click_on_constructor_button()
@@ -58,7 +57,7 @@ class TestMainFunctionality:
         page = MainPage(driver)
         page.loading_main_page()
         count_ingredients_before = page.get_ingredients_number()
-        page.put_ingredient_into_basket(MainPageLocators.SAUCE_NAME)
+        page.put_sauce_into_basket()
         count_ingredients_after = page.get_ingredients_number()
 
         assert count_ingredients_before + 1 == count_ingredients_after

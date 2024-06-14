@@ -3,6 +3,7 @@ import allure
 from pages.base_pade import BasePage
 from locators import MainPageLocators
 from seletools.actions import drag_and_drop
+from constants import Urls
 
 
 class MainPage(BasePage):
@@ -47,9 +48,15 @@ class MainPage(BasePage):
     def wait_for_modal_window_closing(self):
         return self.wait_for_invisible(MainPageLocators.CLOSE_MODAL_WINDOW_BUTTON)
 
-    @allure.step('Добавить ингредиент в корзину')
-    def put_ingredient_into_basket(self, ingredient_name):
-        ingredient = self.find_element_located(ingredient_name)
+    @allure.step('Добавить соус в корзину')
+    def put_sauce_into_basket(self):
+        ingredient = self.find_element_located(MainPageLocators.SAUCE_NAME)
+        basket = self.find_element_located(MainPageLocators.BASKET)
+        drag_and_drop(self.driver, ingredient, basket)
+
+    @allure.step('Добавить булку в корзину')
+    def put_bun_into_basket(self):
+        ingredient = self.find_element_located(MainPageLocators.BURGER_NAME)
         basket = self.find_element_located(MainPageLocators.BASKET)
         drag_and_drop(self.driver, ingredient, basket)
 
@@ -68,8 +75,8 @@ class MainPage(BasePage):
 
     @allure.step('Сделать заказ')
     def make_an_order(self):
-        self.put_ingredient_into_basket(MainPageLocators.BURGER_NAME)
-        self.put_ingredient_into_basket(MainPageLocators.SAUCE_NAME)
+        self.put_bun_into_basket()
+        self.put_sauce_into_basket()
         self.click_on_order_button()
         self.opening_order_model_window()
         order_number = self.get_order_number()
@@ -80,3 +87,10 @@ class MainPage(BasePage):
     def wait_changing_order_number(self):
         self.waiting_for_text_changed(MainPageLocators.ORDER_NUMBER, '7')
 
+    @allure.step('Дождаться смены урла на урл главной страницы')
+    def changing_url_main(self):
+        self.wait_changing_url(Urls.BASE_URL)
+
+    @allure.step('Дождаться смены урла на урл страницы профиля')
+    def changing_url_profile(self):
+        self.wait_changing_url(Urls.BASE_URL + Urls.PROFILE_URL)

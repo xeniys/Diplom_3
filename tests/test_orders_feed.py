@@ -12,7 +12,7 @@ class TestOrdersFeed:
     @allure.description('Открытие модального окна с инфо о заказе при нажатии на заказ в ленте заказов')
     def test_model_window_with_order_details_is_opening(self, driver):
         page = OrdersPage(driver)
-        page.open_page(Urls.ORDER_FEED_URL)
+        page.open_page(Urls.BASE_URL + Urls.ORDER_FEED_URL)
         page.loading_order_page()
         page.click_on_order()
 
@@ -29,7 +29,8 @@ class TestOrdersFeed:
         profile_page.loading_profile_page()
         profile_page.click_on_history_link()
         order_number = profile_page.get_order_number_from_history()
-        profile_page.click_on_order_feed_button()
+        page = MainPage(driver)
+        page.click_on_order_feed_button()
         order_feed = OrdersPage(driver)
         orders_list = order_feed.get_orders_list().text
 
@@ -38,14 +39,14 @@ class TestOrdersFeed:
     @allure.title('Увеличение счетчика "Выполнено за всё время" при создании заказа')
     def test_all_orders_counter_incrementing(self, driver, user_login):
         order_page = OrdersPage(driver)
-        order_page.open_page(Urls.ORDER_FEED_URL)
+        order_page.open_page(Urls.BASE_URL + Urls.ORDER_FEED_URL)
         all_orders_number_before = order_page.get_all_orders_number()
         order_page.open_page(Urls.BASE_URL)
         page = MainPage(driver)
         page.make_an_order()
         page.click_on_order_feed_button()
         order_page = OrdersPage(driver)
-        order_page.open_page(Urls.ORDER_FEED_URL)
+        order_page.open_page(Urls.BASE_URL + Urls.ORDER_FEED_URL)
         all_orders_number_after = order_page.get_all_orders_number()
 
         assert all_orders_number_after > all_orders_number_before
@@ -53,14 +54,14 @@ class TestOrdersFeed:
     @allure.title('Увеличение счетчика "Выполнено за сегодня" при создании заказа')
     def test_today_orders_counter_incrementing(self, driver, user_login):
         order_page = OrdersPage(driver)
-        order_page.open_page(Urls.ORDER_FEED_URL)
+        order_page.open_page(Urls.BASE_URL + Urls.ORDER_FEED_URL)
         today_orders_number_before = order_page.get_today_orders_number()
         order_page.open_page(Urls.BASE_URL)
         page = MainPage(driver)
         page.make_an_order()
         page.click_on_order_feed_button()
         order_page = OrdersPage(driver)
-        order_page.open_page(Urls.ORDER_FEED_URL)
+        order_page.open_page(Urls.BASE_URL + Urls.ORDER_FEED_URL)
         today_orders_number_after = order_page.get_today_orders_number()
 
         assert today_orders_number_after > today_orders_number_before

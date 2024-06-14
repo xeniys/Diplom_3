@@ -28,7 +28,6 @@ class LoginPageLocators:
     LOGIN_EMAIL = (By.XPATH, './/input[@name = "name"]')
     LOGIN_PASSWORD = (By.XPATH, './/input[@name = "Пароль"]')
     LOGIN_BUTTON = (By.XPATH, './/button[text()="Войти"]')
-    PERSONAL_ACC_BUTTON = (By.XPATH, './/p[text()="Личный Кабинет"]')
 
 
 class RecoveryPasswordPageLocators:
@@ -38,7 +37,6 @@ class RecoveryPasswordPageLocators:
 
 
 class ResetPasswordPageLocators:
-    HEADER_RESET_PASSWORD = (By.XPATH, './/h2[text()="Восстановление пароля"]')
     SAVE_BUTTON = (By.XPATH, './/button[text()="Сохранить"]')
     EYE_BUTTON = (By.CSS_SELECTOR, '.input__icon.input__icon-action')
     ACTIVE_PASSWORD_FIELD = (By.CSS_SELECTOR, '.input.input_status_active')
@@ -48,7 +46,6 @@ class ProfilePageLocators:
     PROFILE_LINK = (By.XPATH, './/a[text()="Профиль"]')
     HISTORY_LINK = (By.XPATH, './/a[text()="История заказов"]')
     LOGOUT_LINK = (By.XPATH, './/button[text()="Выход"]')
-    ORDER_FEED_BUTTON = (By.XPATH, './/p[text()="Лента Заказов"]')
     ORDER_IN_HISTORY_DETAILS = (By.XPATH, './/li[@class="OrderHistory_listItem__2x95r mb-6"][last()]/a['
                                           '@class="OrderHistory_link__1iNby"]')
     NUMBER_OF_ORDER_IN_HISTORY_DETAILS = (By.XPATH, './/li[@class="OrderHistory_listItem__2x95r mb-6"][last()]//p['
@@ -56,7 +53,7 @@ class ProfilePageLocators:
 
 
 class OrdersPageLocators:
-    ORDER_FEED_HEADER = (By.XPATH, './/h1[text()="Лента заказов"]')
+    ORDER_FEED_HEADER = (By.XPATH, './/h1[text()="Лента заказов"]') # это заголовок с лентой заказов, а не кнопка из хедера
     ORDER = (By.XPATH, './/li[@class="OrderHistory_listItem__2x95r mb-6"][1]/a[@class="OrderHistory_link__1iNby"]')
     MODAL_WINDOW_ORDER_DETAILS = (By.XPATH, './/p[text()="Cостав"]')
     ORDER_FEED = (By.XPATH, './/ul[@class="OrderFeed_list__OLh59"]')

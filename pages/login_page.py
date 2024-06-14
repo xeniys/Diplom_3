@@ -29,25 +29,8 @@ class LoginPage(BasePage):
 
     @allure.step('Дождаться смены урла на урл страницы авторизации')
     def changing_url_login(self):
-        return self.wait_changing_url(Urls.LOGIN_URL)
+        return self.wait_changing_url(Urls.BASE_URL + Urls.LOGIN_URL)
 
-    @allure.step('Дождаться смены урла на урл главной страницы')
-    def changing_url_main(self):
-        self.wait_changing_url(Urls.BASE_URL)
-
-    @allure.step('Дождаться смены урла на урл страницы профиля')
-    def changing_url_profile(self):
-        self.wait_changing_url(Urls.PROFILE_URL)
-
-    @allure.step('Нажать на кнопку "Личный кабинет" в хедере')
-    def click_on_personal_cabinet_button(self):
-        return self.find_element_clickable(LoginPageLocators.PERSONAL_ACC_BUTTON)
-
-    @allure.step('Авторизоваться и перейти в личный кабинет')
-    def login_personal_account_with_waiting(self):
-        self.click_on_login_button()
-        self.changing_url_login()
-        self.click_on_personal_cabinet_button()
-        self.changing_url_main()
-        self.changing_url_profile()
-
+    @allure.step('Дождаться появления кнопки войти')
+    def wait_for_login_button(self):
+        return self.find_element_located(LoginPageLocators.LOGIN_BUTTON)
